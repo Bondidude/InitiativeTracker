@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    
+    <TextView 
+        android:id="@+id/encounterNameLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_encounter_name" />
+    
+    <EditText
+    	android:id="@+id/encounterNameInput"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text" />
+    
+    <TextView
+        android:id="@+id/encounterPartyLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_encounter_party" />
+    
+    <TextView 
+        android:id="@+id/encounterPartyDisplay"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_encounter_party" 
+        android:visibility="gone"
+    	android:textStyle="italic" />
+    
+    <EditText
+        android:id="@+id/encounterPartyId"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:visibility="gone" />
+    
+    <Button
+        android:id="@+id/encounterPartyBtn"
+   		android:onClick="viewParties"
+   		android:layout_width="fill_parent"
+   		android:layout_height="wrap_content"
+   		android:text="@string/btn_view_parties" />
+    
+    <Button 
+        android:id="@+id/encounterSubmit"
+        android:onClick="submitEncounter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_submit" />
+    
+</LinearLayout>
