@@ -12,9 +12,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 
@@ -50,12 +53,6 @@ public class Classic_Initiative_Activity extends ListActivity {
 		characterProgressDialog = ProgressDialog.show(Classic_Initiative_Activity.this, 
 				getString(R.string.message_loading_characters), 
 				getString(R.string.message_please_wait), true);
-	}
-	
-	
-	
-	public void onListItemClick(ListView parent, View v, int position, long id) {
-		moveToBottom(position);
 	}
 	
 	private Runnable returnCharacters = new Runnable() {
@@ -137,6 +134,7 @@ public class Classic_Initiative_Activity extends ListActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View v = convertView;
+			final int viewPosition = position;
 			
 			if(v == null) {
 				LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -153,6 +151,36 @@ public class Classic_Initiative_Activity extends ListActivity {
 				if(iV != null) iV.setText(getResources().getString(R.string.label_character_initiative) + ": " + c.getInitiative());
 				if(dV != null) dV.setText(getResources().getString(R.string.label_character_defense) + ": " + c.getDefense());
 			}
+			
+			v.setOnLongClickListener(new OnLongClickListener() {
+				
+				@Override
+				public boolean onLongClick(View v) {
+					
+					showCharacterActionMenu(viewPosition, v);
+					
+					return true;
+				}
+
+				private void showCharacterActionMenu(int viewPosition, View v) {
+					
+					PopupMenu selectAction = new PopupMenu(getBaseContext(), v);
+					selectAction.getMenu().add(R.string.menu_edit_character);
+					selectAction.getMenu().add(R.string.menu_delete_character);
+					selectAction.show();
+					
+				}
+			});
+			
+			v.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View arg0) {
+					moveToBottom(viewPosition);
+				}
+				
+			});
+			
 			return v;
 		}
 	}

@@ -69,12 +69,14 @@ public final class R {
         public static final int label_character_type=0x7f05000b;
         public static final int label_encounter_name=0x7f05000c;
         public static final int label_encounter_party=0x7f05000d;
+        public static final int menu_delete_character=0x7f050013;
+        public static final int menu_edit_character=0x7f050014;
         public static final int message_empty_list=0x7f05000e;
         public static final int message_encounter_name=0x7f05000f;
         public static final int message_encounter_party=0x7f050010;
         public static final int message_loading_characters=0x7f050011;
         public static final int message_please_wait=0x7f050012;
-        public static final int text_encounter_party=0x7f050013;
+        public static final int text_encounter_party=0x7f050015;
     }
     public static final class style {
         /** 
