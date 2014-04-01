@@ -16,6 +16,7 @@ public class Character_Input_Activity extends Activity {
 	EditText editDefense;
 	CheckBox editType;
 	Character newC = new Character();
+	Boolean editMode = false;
 	long id = 0;
 	Runnable buildNewCharacter;
 	//private ProgressDialog saveCharacterDialog = null;
@@ -23,6 +24,11 @@ public class Character_Input_Activity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.character_input);
+        
+        if(savedInstanceState != null) {
+        	savedInstanceState.getBundle("C_ID");
+        	editMode = true;
+        }
         
 		editName = (EditText) findViewById(R.id.characterName);
     	editInitiative = (EditText) findViewById(R.id.initiative);

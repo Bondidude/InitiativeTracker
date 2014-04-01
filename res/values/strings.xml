@@ -19,6 +19,7 @@
     <string name="label_encounter_party">Party</string>
     
     <string name="message_empty_list">There are no Character initiatives to view.</string>
+    <string name="message_character_deleted">Character deleted.</string>
     <string name="message_encounter_name">You must enter a Name</string>
     <string name="message_encounter_party">You must select a Party</string>
     <string name="message_loading_characters">Loading Characters</string>

@@ -11,14 +11,16 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Classic_Initiative_Activity extends ListActivity {
@@ -28,6 +30,7 @@ public class Classic_Initiative_Activity extends ListActivity {
 	int request_Code = 1;
 	DB_Adapter_Activity db = new DB_Adapter_Activity(this);
 	private Runnable buildCharacterList;
+	private Runnable deleteCharacter;
 	private ProgressDialog characterProgressDialog = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -115,9 +118,34 @@ public class Classic_Initiative_Activity extends ListActivity {
 		characterNamesArrAd.notifyDataSetChanged();
 	}
 	
+	private void deleteCharacter(int position) {
+		Character item = characterNames.get(position);
+		int positionId = item.getCharacterId();
+		try {
+			db.open();	
+			db.deleteCharacter(positionId);
+			db.close();
+		} catch (Exception e) {
+			Log.e("Error", "Failed to delete character");
+		}
+		
+		characterNames.remove(item);
+		characterNamesArrAd.notifyDataSetChanged();
+	}
+
+	private void editCharacter(int position) {
+		Character item = characterNames.get(position);
+		Intent editC = new Intent(this, Character_Input_Activity.class);
+		Bundle character = editC.getExtras();
+		
+		character.putInt("C_ID", item.getCharacterId());
+		
+		
+	}
+	
 	//Start the intent to add a new character to the list
 	public void addCharacter(View view) {
-		startActivityForResult(new Intent(getBaseContext(), Character_Input_Activity.class), 
+		startActivityForResult(new Intent(this, Character_Input_Activity.class), 
 				request_Code);
 	}
 	
@@ -164,11 +192,33 @@ public class Classic_Initiative_Activity extends ListActivity {
 
 				private void showCharacterActionMenu(int viewPosition, View v) {
 					
+					final int position = viewPosition;
+					
 					PopupMenu selectAction = new PopupMenu(getBaseContext(), v);
-					selectAction.getMenu().add(R.string.menu_edit_character);
-					selectAction.getMenu().add(R.string.menu_delete_character);
+					//selectAction.getMenu().add(0, 0, 0, R.string.menu_edit_character);
+					selectAction.getMenu().add(0, 1, 0, R.string.menu_delete_character);
+					
 					selectAction.show();
 					
+					selectAction.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+						
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							
+							switch(item.getItemId()) {
+							//case 0:
+							//editCharacter(position);
+							//break;
+							
+							case 1:
+								deleteCharacter(position);
+								break;
+								
+							}
+							
+							return true;
+						}
+					});
 				}
 			});
 			
