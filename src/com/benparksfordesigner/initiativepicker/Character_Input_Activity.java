@@ -2,6 +2,7 @@ package com.benparksfordesigner.initiativepicker;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -60,6 +61,7 @@ public class Character_Input_Activity extends Activity {
 	    	if(newC != null) {
 				//Start the Intent to pass it back then add in the bits and pieces as extras
 				Intent i = new Intent(getBaseContext(), Classic_Initiative_Activity.class);
+					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(i);
 					finish();
 	    	}

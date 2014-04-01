@@ -30,7 +30,6 @@ public class Classic_Initiative_Activity extends ListActivity {
 	int request_Code = 1;
 	DB_Adapter_Activity db = new DB_Adapter_Activity(this);
 	private Runnable buildCharacterList;
-	private Runnable deleteCharacter;
 	private ProgressDialog characterProgressDialog = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +130,7 @@ public class Classic_Initiative_Activity extends ListActivity {
 		
 		characterNames.remove(item);
 		characterNamesArrAd.notifyDataSetChanged();
+		Toast.makeText(this, R.string.message_character_deleted, Toast.LENGTH_SHORT).show();
 	}
 
 	private void editCharacter(int position) {
